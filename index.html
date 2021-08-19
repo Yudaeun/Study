@@ -20,11 +20,120 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
-    <title> 부트스트랩 연습하기</title>
-</head>
+    <title> 메모메모</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Stylish&display=swap" rel="stylesheet">
 
+</head>
+<style>
+     *{
+    font-family: 'Stylish', sans-serif;
+    }
+    .wrap{
+        width:900px;
+        margin:auto;
+    }
+    .card-title{
+        color:pink;
+    }
+    .card-comment{
+        color:darkseagreen;
+        font-weight: bold;
+    }
+    .posting-box{
+        width:500px;
+        margin:0px auto 20px auto; /*위 왼쪽 아래 오른쪽*/
+        border:solid;
+        border-radius: 20px;
+        padding:50px;
+    }
+
+</style>
+<script>
+    function hey(){
+        alert('안녕!!');
+    }
+</script>
 <body>
-  <button type="button" class="btn btn-dark">#mood</button>
+
+<div class="wrap">
+ <div class="jumbotron">
+  <h1 class="display-4">메모메모월드</h1>
+  <p class="lead">특별히 공유하고 싶은 내용이나, 링크가 있을 때 메모할 수 있습니다.</p>
+  <hr class="my-4">
+  <p></p>
+  <p class="lead">
+    <a onclick="hey()" class="btn btn-primary btn-lg" href="#" role="button">포스트하기</a>
+  </p>
+</div>
+     <div class="posting-box">
+  <div class="form-group">
+    <label for="exampleInputEmail1">URL</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+    <small id="emailHelp" class="form-text text-muted"></small>
+</div>
+<div class="form-group">
+    <label for="exampleFormControlTextarea1">Comment</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+<button type="submit" class="btn btn-primary">Submit</button>
+
+</div>
+<div class="card-columns">
+  <div class="card">
+    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_960_720.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-comment">Write the comment</p>
+    </div>
+  </div>
+      <div class="card">
+    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_960_720.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-comment">Write the comment</p>
+    </div>
+  </div>
+      <div class="card">
+    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_960_720.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-comment">Write the comment</p>
+    </div>
+  </div>
+      <div class="card">
+    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_960_720.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-comment">Write the comment</p>
+    </div>
+  </div>
+      <div class="card">
+    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_960_720.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-comment">Write the comment</p>
+    </div>
+  </div>
+      <div class="card">
+    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_960_720.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-comment">Write the comment</p>
+    </div>
+  </div>
+
+</div>
+
+</div>
+
 </body>
 
 </html>
