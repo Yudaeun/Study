@@ -21,6 +21,7 @@
         crossorigin="anonymous"></script>
 
     <title> 메모메모</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Stylish&display=swap" rel="stylesheet">
@@ -51,8 +52,16 @@
 
 </style>
 <script>
+    let count=1;
     function hey(){
-        alert('안녕!!');
+
+        if(count%2==0){
+            alert('짝수입니다!')
+
+        }else{
+            alert('홀수입니다!')
+        }
+        count+=1;
     }
 </script>
 <body>
@@ -65,13 +74,13 @@
   <hr class="my-4">
   <p></p>
   <p class="lead">
-    <a onclick="hey()" class="btn btn-primary btn-lg" href="#" role="button">포스트하기</a>
+    <a onclick="hey()" id="btn-post-box" class="btn btn-primary btn-lg" href="#" role="button">포스트하기</a>
   </p>
 </div>
-     <div class="posting-box">
+     <div class="posting-box" id="post-box">
   <div class="form-group">
-    <label for="exampleInputEmail1">URL</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+    <label >URL</label>
+    <input type="email" class="form-control" id="article-url" aria-describedby="emailHelp" placeholder="">
     <small id="emailHelp" class="form-text text-muted"></small>
 </div>
 <div class="form-group">
@@ -81,7 +90,7 @@
 <button type="submit" class="btn btn-primary">Submit</button>
 
 </div>
-<div class="card-columns">
+<div class="card-columns" id="card-box">
   <div class="card">
     <img class="card-img-top" src="https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_960_720.jpg" alt="Card image cap">
     <div class="card-body">
