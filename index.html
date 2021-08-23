@@ -48,20 +48,24 @@
         border:solid;
         border-radius: 20px;
         padding:50px;
+
+        display: none;
     }
 
 </style>
 <script>
-    let count=1;
-    function hey(){
 
-        if(count%2==0){
-            alert('짝수입니다!')
-
-        }else{
-            alert('홀수입니다!')
+    function openclose(){
+        let status=$('#post-box').css('display');
+        if(status=='block') {
+            $('#post-box').hide();
+            $('#btn-post-box').text('포스팅박스 열기');
         }
-        count+=1;
+        else{
+            $('#post-box').show();
+            $('#btn-post-box').text('포스팅박스 닫기');
+
+        }
     }
 </script>
 <body>
@@ -74,7 +78,7 @@
   <hr class="my-4">
   <p></p>
   <p class="lead">
-    <a onclick="hey()" id="btn-post-box" class="btn btn-primary btn-lg" href="#" role="button">포스트하기</a>
+    <a onclick="openclose()" id="btn-post-box" class="btn btn-primary btn-lg" href="#" role="button">포스트하기</a>
   </p>
 </div>
      <div class="posting-box" id="post-box">
