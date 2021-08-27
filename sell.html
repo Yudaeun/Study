@@ -41,16 +41,36 @@
  }
 </style>
 <script>
+        $(document).ready(function(){
+	q1();
+});
     function ok(){
         alert('주문이 완료되었습니다!');
     }
+     function q1() {
+
+            $.ajax({
+                type: "GET",
+                url: "http://spartacodingclub.shop/sparta_api/rate",
+                data: {},
+                success: function (response) {
+                    let rows = response['rate'];
+                    $('#q1-price').text(rows+' / 달러-원 환율');
+
+
+                }
+
+            })
+        }
+
 </script>
 
 <body>
 <div class="wrap">
 <img class="card-img-top" src="http://gdimg.gmarket.co.kr/1159210155/still/600?ver=1510293353" alt="Card image cap">
    <div class="item-line">
-    <h1>귀여운 곰 인형을 팝니다. <span class="price">가격:1,0000원/개</span></h1>
+    <h1>귀여운 곰 인형을 팝니다. <span class="price" >가격:1,0000원/개</span></h1>
+       <p class="rate"><span id="q1-price">1000</span></p>
     <p>미니소에서 팔고 있는 귀여운 곰 인형이에요. 카카오톡 선물하기에도 이렇게 생긴 곰인형이 많더라구요. 제 애착인형이에요.</p>
    </div>
 
