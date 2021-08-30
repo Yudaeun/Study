@@ -8,60 +8,96 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
     <title> 메모메모</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Stylish&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Stylish&display=swap" rel="stylesheet">
 
 </head>
 <style>
-     *{
-    font-family: 'Stylish', sans-serif;
+    * {
+        font-family: 'Stylish', sans-serif;
     }
-    .wrap{
-        width:900px;
-        margin:auto;
+
+    .wrap {
+        width: 900px;
+        margin: auto;
     }
-    .card-title{
-        color:pink;
+
+    .card-title {
+        color: pink;
     }
-    .card-comment{
-        color:darkseagreen;
+
+    .card-comment {
+        color: darkseagreen;
         font-weight: bold;
     }
-    .posting-box{
-        width:500px;
-        margin:0px auto 20px auto; /*위 왼쪽 아래 오른쪽*/
-        border:solid;
+
+    .posting-box {
+        width: 500px;
+        margin: 0px auto 20px auto; /*위 왼쪽 아래 오른쪽*/
+        border: solid;
         border-radius: 20px;
-        padding:50px;
+        padding: 50px;
 
         display: none;
     }
 
 </style>
 <script>
+    $(document).ready(function () {
+        listing();
+    });
 
-    function openclose(){
-        let status=$('#post-box').css('display');
-        if(status=='block') {
+    function listing() {
+        $('#card-box').empty()
+         $.ajax({
+                type: "GET",
+                url: "http://spartacodingclub.shop/post",
+                data: {},
+                success: function (response) {
+                    let rows=response['articles']
+                    for(let i=0;i<rows.length;i++){
+                        let comment=rows[i]['comment']
+                        let desc=rows[i]['desc']
+                        let image=rows[i]['image']
+                        let title=rows[i]['title']
+                        let url=rows[i]['url']
+
+                        let temp_html=`<div class="card">
+            <img class="card-img-top" src="${image}"
+                 alt="Card image cap">
+            <div class="card-body">
+                <h5 href="${url}" class="card-title">${title}e</h5>
+                <p class="card-text">${desc}</p>
+                <p class="card-comment">${comment}</p>
+            </div>
+        </div>`
+                        $('#card-box').append(temp_html)
+                    }
+                }
+            })
+    }
+
+    function openclose() {
+        let status = $('#post-box').css('display');
+        if (status == 'block') {
             $('#post-box').hide();
             $('#btn-post-box').text('포스팅박스 열기');
-        }
-        else{
+        } else {
             $('#post-box').show();
             $('#btn-post-box').text('포스팅박스 닫기');
 
@@ -72,79 +108,91 @@
 
 
 <div class="wrap">
- <div class="jumbotron">
-  <h1 class="display-4">메모메모월드</h1>
-  <p class="lead">특별히 공유하고 싶은 내용이나, 링크가 있을 때 메모할 수 있습니다.</p>
-  <hr class="my-4">
-  <p></p>
-  <p class="lead">
-    <a onclick="openclose()" id="btn-post-box" class="btn btn-primary btn-lg" href="#" role="button">포스트하기</a>
-  </p>
-</div>
-     <div class="posting-box" id="post-box">
-  <div class="form-group">
-    <label >URL</label>
-    <input type="email" class="form-control" id="article-url" aria-describedby="emailHelp" placeholder="">
-    <small id="emailHelp" class="form-text text-muted"></small>
-</div>
-<div class="form-group">
-    <label for="exampleFormControlTextarea1">Comment</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-  </div>
-<button type="submit" class="btn btn-primary">Submit</button>
+    <div class="jumbotron">
+        <h1 class="display-4">메모메모월드</h1>
+        <p class="lead">특별히 공유하고 싶은 내용이나, 링크가 있을 때 메모할 수 있습니다.</p>
+        <hr class="my-4">
+        <p></p>
+        <p class="lead">
+            <a onclick="openclose()" id="btn-post-box" class="btn btn-primary btn-lg" href="#" role="button">포스트하기</a>
+        </p>
+    </div>
+    <div class="posting-box" id="post-box">
+        <div class="form-group">
+            <label>URL</label>
+            <input type="email" class="form-control" id="article-url" aria-describedby="emailHelp" placeholder="">
+            <small id="emailHelp" class="form-text text-muted"></small>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Comment</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
 
-</div>
-<div class="card-columns" id="card-box">
-  <div class="card">
-    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_960_720.jpg" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-comment">Write the comment</p>
     </div>
-  </div>
-      <div class="card">
-    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_960_720.jpg" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-comment">Write the comment</p>
-    </div>
-  </div>
-      <div class="card">
-    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_960_720.jpg" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-comment">Write the comment</p>
-    </div>
-  </div>
-      <div class="card">
-    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_960_720.jpg" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-comment">Write the comment</p>
-    </div>
-  </div>
-      <div class="card">
-    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_960_720.jpg" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-comment">Write the comment</p>
-    </div>
-  </div>
-      <div class="card">
-    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_960_720.jpg" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-comment">Write the comment</p>
-    </div>
-  </div>
+    <div class="card-columns" id="card-box">
+        <div class="card">
+            <img class="card-img-top" src="https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_960_720.jpg"
+                 alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
+                    content. This content is a little bit longer.</p>
+                <p class="card-comment">Write the comment</p>
+            </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_960_720.jpg"
+                 alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
+                    content. This content is a little bit longer.</p>
+                <p class="card-comment">Write the comment</p>
+            </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_960_720.jpg"
+                 alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
+                    content. This content is a little bit longer.</p>
+                <p class="card-comment">Write the comment</p>
+            </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_960_720.jpg"
+                 alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
+                    content. This content is a little bit longer.</p>
+                <p class="card-comment">Write the comment</p>
+            </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_960_720.jpg"
+                 alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
+                    content. This content is a little bit longer.</p>
+                <p class="card-comment">Write the comment</p>
+            </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="https://cdn.pixabay.com/photo/2021/08/10/18/32/cat-6536684_960_720.jpg"
+                 alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
+                    content. This content is a little bit longer.</p>
+                <p class="card-comment">Write the comment</p>
+            </div>
+        </div>
 
-</div>
+    </div>
 
 </div>
 
